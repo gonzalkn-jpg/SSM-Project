@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+
+
+<html>
+<body bgcolor = "white" text = "black">
+<head>
+	<title> Senior Project Prototype </title>
+</head>
+
+<body>
+
+
+
+</body>
+
+</html>
