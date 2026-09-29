@@ -15,12 +15,7 @@
 	
 <br> </br> <br> </br> <br> </br> <br> </br> <!-- spaced out downwards; let the stuff breathe -->
 
-<script>
-<!-- functions, variables, etc. will be defined here -->
 
-
-
-</script> 
 
 <!-- input buttons -->
 <center>
@@ -67,34 +62,24 @@
 	<p> <strong> <u> Reminders List </u> </strong> </p>
 </font> 
 <font size = "3">
-	<p> 
-	<input type = "button" id = "check1" size = 3
-	onclick = "document.getElementById('rem1').value = '';
-				document.getElementById('check1').value = '✓';"> <!-- makes input box blank and a check symbol appears when clicked -->
+	<p>
+	<input type = "button" id = "check1" value = ' ' size = 3>
 	<input type = "text" id = rem1 value = "Reminder 1" size = 15> 
 	</p>
 	<p> 
-	<input type = "button" id = "check2" size = 3
-	onclick = "document.getElementById('rem2').value = '';
-				document.getElementById('check2').value = '✓';">
+	<input type = "button" id = "check2" value = ' ' size = 3>
 	<input type = "text" id = rem2 value = "Reminder 2"  size = 15> 
 	</p>
 	<p> 
-	<input type = "button" id = "check3" size = 3
-	onclick = "document.getElementById('rem3').value = '';
-				document.getElementById('check3').value = '✓';">
+	<input type = "button" id = "check3" value = ' ' size = 3>
 	<input type = "text" id = rem3 value = "Reminder 3"  size = 15> 
 	</p>
 	<p> 
-	<input type = "button" id = "check4" size = 3
-	onclick = "document.getElementById('rem4').value = '';
-				document.getElementById('check4').value = '✓';">
+	<input type = "button" id = "check4" value = ' ' size = 3>
 	<input type = "text" id = rem4 value = "Reminder 4"  size = 15> 
 	</p> 
 	<p> 
-	<input type = "button" id = "check5" size = 3
-	onclick = "document.getElementById('rem5').value = '';
-				document.getElementById('check5').value = '✓';">
+	<input type = "button" id = "check5" value = ' ' size = 3>
 	<input type = "text" id = rem5 value = "Reminder 5"  size = 15> 
 	</p>
 	
@@ -105,20 +90,86 @@
 
 </table>
 
-<!-- practice code -->
 <script>
+<!-- functions, variables, etc. will be defined here -->
 
+const chk1 = document.getElementById("check1");
+const rm1 = document.getElementById("rem1");
+
+chk1.addEventListener("click", function(){
+    if (chk1.value === "✓") {
+      chk1.value = " ";
+	  rm1.value = " ";} 
+	  else {
+      chk1.value = "✓";
+	  rm1.value = " ";
+    }
+  });
+
+const chk2 = document.getElementById("check2");
+const rm2 = document.getElementById("rem2");
+
+chk2.addEventListener("click", function(){
+    if (chk2.value === "✓") {
+      chk2.value = " ";
+	  rm2.value = " ";} 
+	  else {
+      chk2.value = "✓";
+	  rm2.value = " ";
+    }
+  });
+  
+const chk3 = document.getElementById("check3");
+const rm3 = document.getElementById("rem3");
+
+chk3.addEventListener("click", function(){
+    if (chk3.value === "✓") {
+      chk3.value = " ";
+	  rm3.value = " ";} 
+	  else {
+      chk3.value = "✓";
+	  rm3.value = " ";
+    }
+  });
+  
+const chk4 = document.getElementById("check4");
+const rm4 = document.getElementById("rem4");
+
+chk4.addEventListener("click", function(){
+    if (chk4.value === "✓") {
+      chk4.value = " ";
+	  rm4.value = " ";} 
+	  else {
+      chk4.value = "✓";
+	  rm4.value = " ";
+    }
+  });
+  
+const chk5 = document.getElementById("check5");
+const rm5 = document.getElementById("rem5");
+
+chk5.addEventListener("click", function(){
+    if (chk5.value === "✓") {
+      chk5.value = " ";
+	  rm5.value = " ";} 
+	  else {
+      chk5.value = "✓";
+	  rm5.value = " ";
+    }
+  });
+  
+ <!-- practice code -->
 const reminder1 = document.getElementById('rem1');
 
 function saveData() {
-
 	const txt = reminder1.value;
-	
 	localStorage.setItem('rem1Storage', txt);
-	
 }
-</script>
 <!-- end of practice code -->
+
+</script> 
+
+
 
 </body>
 
