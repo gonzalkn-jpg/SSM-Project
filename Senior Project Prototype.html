@@ -19,28 +19,34 @@
 
 <!-- input buttons -->
 <center>
-<table>
+<table border = "5">
 
 	<tr> <!-- Table row 1 -->
 	<td> <center> <!-- Column 1 -->
 	<a href = "https://calendar.google.com" target = "_blank">
-	<input type = button value = "       Calendar      "> <!-- opens Google Calendar -->
+	<input type = button value = "       Calendar       "> <!-- opens Google Calendar -->
 	</a>
 	</center> </td>
 	
 	<td> <center> <!-- Column 2 -->
-	<input type = button value = "         Reminders        "> 
+	<button id = "reminders"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	Reminders 												<!-- opens/closes Reminders List -->
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </button>
 	</center> </td>
 		
 	</tr> 
 	
 	<tr> <!-- Table row 2 -->
 	<td> <center> <!-- Column 1 -->
-	<input type = button value = "          Timer         "> 
+	<button id = "timer"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		Timer 												<!-- sets a timer -->
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </button>
 	</center> </td>
 		
 	<td> <center> <!-- Column 2 -->
-	<input type = button value = " Mysterious Button ;) "> 
+	<button id = "mystery"> 
+		Mysterious Button ;) 								<!-- It probably does something -->
+	</button> 
 	</center> </td>
 		
 	<!-- the words are spaced out like that just so that the buttons will be the same size -->
@@ -52,9 +58,9 @@
 
 <br> </br> <br> </br>
 
-<center> <table id = "remsTable" border = "1"> </center>
+<center> <table id = "remsTable" border = "1" class = "hidden"> </center>
 
-<!-- New attempt at an improved Reminders List! -->
+<!-- improved Reminders List; hidden by default until 'Reminders' button is clicked -->
 <tr> <th> <font size = "6"> <strong> <u> Reminders List </u> </strong> </font> </th> </tr>
 
 <font size = "5">
@@ -94,6 +100,11 @@
 </tr>
 </font>
 
+<!-- .hidden style hides Reminders Table by default -->
+<style>
+  .hidden {display: none;}
+</style>
+
 <!-- Scrapped reminders table, replaced by the one above. 
 	 I left it here as a lesson -->
 
@@ -131,10 +142,18 @@
 </table> </center>
 
 
-
 <script>
 <!-- functions, variables, etc. will be defined here -->
 
+<!-- when clicking "Reminders" button, it toggles Reminders List visibility -->
+const toggleRems = document.getElementById('reminders');
+const toggleTab = document.getElementById('remsTable');
+
+toggleRems.addEventListener('click', () => {
+    remsTable.classList.toggle('hidden');
+  });
+
+<!-- toggles value of the check buttons between no value and a checkmark symbol -->
 const chk1 = document.getElementById("check1");
 const rm1 = document.getElementById("rem1");
 
