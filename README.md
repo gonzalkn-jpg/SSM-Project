@@ -1,2 +1,3 @@
-# SSM Project
-
+# SSM Project - Time & Task Management HTML
+###
+### (Project reflection pending)
