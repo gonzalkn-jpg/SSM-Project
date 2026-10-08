@@ -65,51 +65,19 @@
 <tr> <th> <font size = "6"> <strong> <u> Reminders List </u> </strong> </font> </th> </tr>
 </thead>
 
-<tbody>
+<tbody id = "remListBody">
 
 <font size = "5">
-<tr> 
+<tr id = rem1> 
 	<td>
 		<input type = "button" id = "check1" value = ' ' size = 3>
-		<input type = "text" id = "rem1" value = "" size = 15>
+		<input type = "text" id = "remBox1" value = "" size = 15>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<input type = "button" id = "addRem" value = '+' size 4>
 	</td>
 </tr>
-
-</tbody>
-
-<!-- I'm putting this aside for now. I'm hoping to make an index-based function for these 
-
-<tr> 
-	<td>
-		<input type = "button" id = "check2" value = ' ' size = 3>
-		<input type = "text" id = rem2 value = "Reminder 2" size = 15>
-	</td>
-</tr>
-
-<tr> 
-	<td>
-		<input type = "button" id = "check3" value = ' ' size = 3>
-		<input type = "text" id = rem3 value = "Reminder 3" size = 15>
-	</td>
-</tr>
-
-<tr> 
-	<td>
-		<input type = "button" id = "check4" value = ' ' size = 3>
-		<input type = "text" id = rem4 value = "Reminder 4" size = 15>
-	</td>
-</tr>
-
-<tr> 
-	<td>
-		<input type = "button" id = "check5" value = ' ' size = 3>
-		<input type = "text" id = rem5 value = "Reminder 5" size = 15>
-	</td>
-</tr> -->
-
 </font>
+</tbody>
 
 
 <!-- .hidden style hides Reminders Table by default -->
@@ -118,43 +86,12 @@
 </style>
 
 
-
-<!-- Scrapped reminders table, replaced by the one above. 
-	 I left it here as a lesson -->
-	 
-<!-- <div id = "rems">
-<font size = "6" > 
-	<p> <strong> <u> Reminders List </u> </strong> </p>
-</font> 
-<font size = "3">
-	<p>
-	<input type = "button" id = "check1" value = ' ' size = 3>
-	<input type = "text" id = rem1 value = "Reminder 1" size = 15> 
-	</p>
-	<p> 
-	<input type = "button" id = "check2" value = ' ' size = 3>
-	<input type = "text" id = rem2 value = "Reminder 2"  size = 15> 
-	</p>
-	<p> 
-	<input type = "button" id = "check3" value = ' ' size = 3>
-	<input type = "text" id = rem3 value = "Reminder 3"  size = 15> 
-	</p>
-	<p> 
-	<input type = "button" id = "check4" value = ' ' size = 3>
-	<input type = "text" id = rem4 value = "Reminder 4"  size = 15> 
-	</p> 
-	<p> 
-	<input type = "button" id = "check5" value = ' ' size = 3>
-	<input type = "text" id = rem5 value = "Reminder 5"  size = 15> 
-	</p>	
-</font>
-</div> -->
-
 </table> </center>
 
 
 <script>
  <!-- functions, variables, etc. will be defined here -->
+
 
  <!-- TOGGLE VISIBILITY FUNCTION -->
  <!-- when clicking "Reminders" button, it toggles Reminders List visibility -->
@@ -168,10 +105,16 @@ toggleRems.addEventListener('click', () => {
 
 
 
+ <!-- ADD REMINDERS FUNCTIONS -->
+
+ <!-- END ADD REMINDERS FUNCTIONS -->
+
+
+
  <!-- TOGGLE CHECKMARKS FUNCTION -->
  <!-- toggles value of the check buttons between no value and a checkmark symbol -->
 const chk1 = document.getElementById("check1");
-const rm1 = document.getElementById("rem1");
+const rm1 = document.getElementById("remBox1");
 
 chk1.addEventListener("click", function(){
     if (chk1.value === "✓") {
@@ -182,12 +125,6 @@ chk1.addEventListener("click", function(){
 	  rm1.value = " ";
     }
   });
-
-
-<!-- I'll discard the others for now, since I'm 	 -->
-<!-- hoping to make an index-based function for this -->
-  
-  
  <!-- END TOGGLE CHECKMARKS FUNCTION -->
   
   
@@ -201,7 +138,7 @@ const reminder1 = document.getElementById('rem1');
 function saveData() {
 	const txt = reminder1.value;
 	localStorage.setItem('rem1Storage', txt);
-}
+	}
  <!-- end practice code -->
  
  <!-- END LOCAL STORAGE FUNCTION -->
