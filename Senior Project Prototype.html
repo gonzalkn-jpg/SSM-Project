@@ -61,15 +61,25 @@
 <center> <table id = "remsTable" border = "1" class = "hidden"> </center>
 
 <!-- improved Reminders List; hidden by default until 'Reminders' button is clicked -->
+<thead> 
 <tr> <th> <font size = "6"> <strong> <u> Reminders List </u> </strong> </font> </th> </tr>
+</thead>
+
+<tbody>
 
 <font size = "5">
 <tr> 
 	<td>
 		<input type = "button" id = "check1" value = ' ' size = 3>
-		<input type = "text" id = rem1 value = "Reminder 1" size = 15>
+		<input type = "text" id = "rem1" value = "" size = 15>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type = "button" id = "addRem" value = '+' size 4>
 	</td>
 </tr>
+
+</tbody>
+
+<!-- I'm putting this aside for now. I'm hoping to make an index-based function for these 
 
 <tr> 
 	<td>
@@ -97,8 +107,10 @@
 		<input type = "button" id = "check5" value = ' ' size = 3>
 		<input type = "text" id = rem5 value = "Reminder 5" size = 15>
 	</td>
-</tr>
+</tr> -->
+
 </font>
+
 
 <!-- .hidden style hides Reminders Table by default -->
 <style>
@@ -171,57 +183,11 @@ chk1.addEventListener("click", function(){
     }
   });
 
-const chk2 = document.getElementById("check2");
-const rm2 = document.getElementById("rem2");
 
-chk2.addEventListener("click", function(){
-    if (chk2.value === "✓") {
-      chk2.value = " ";
-	  rm2.value = " ";} 
-	  else {
-      chk2.value = "✓";
-	  rm2.value = " ";
-    }
-  });
+<!-- I'll discard the others for now, since I'm 	 -->
+<!-- hoping to make an index-based function for this -->
   
-const chk3 = document.getElementById("check3");
-const rm3 = document.getElementById("rem3");
-
-chk3.addEventListener("click", function(){
-    if (chk3.value === "✓") {
-      chk3.value = " ";
-	  rm3.value = " ";} 
-	  else {
-      chk3.value = "✓";
-	  rm3.value = " ";
-    }
-  });
   
-const chk4 = document.getElementById("check4");
-const rm4 = document.getElementById("rem4");
-
-chk4.addEventListener("click", function(){
-    if (chk4.value === "✓") {
-      chk4.value = " ";
-	  rm4.value = " ";} 
-	  else {
-      chk4.value = "✓";
-	  rm4.value = " ";
-    }
-  });
-  
-const chk5 = document.getElementById("check5");
-const rm5 = document.getElementById("rem5");
-
-chk5.addEventListener("click", function(){
-    if (chk5.value === "✓") {
-      chk5.value = " ";
-	  rm5.value = " ";} 
-	  else {
-      chk5.value = "✓";
-	  rm5.value = " ";
-    }
-  });
  <!-- END TOGGLE CHECKMARKS FUNCTION -->
   
   
