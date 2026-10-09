@@ -17,7 +17,7 @@
 
 
 
-<!-- input buttons -->
+<!-- MAIN BUTTONS -->
 <center>
 <table border = "5">
 
@@ -54,11 +54,19 @@
 	</tr>
 		
 </center> </table> 
-<!-- input buttons end here -->
+<!-- END MAIN BUTTONS -->
 
 <br> </br> <br> </br>
 
-<center> <table id = "remsTable" border = "1" class = "hidden"> </center>
+<center>
+<!-- TIMER -->
+
+<!-- END TIMER -->
+
+
+
+<!-- REMINDERS LIST TABLE -->
+<table id = "remsTable" border = "1" class = "hidden">
 
 <!-- improved Reminders List; hidden by default until 'Reminders' button is clicked -->
 <thead> 
@@ -66,7 +74,6 @@
 </thead>
 
 <tbody id = "remListBody">
-
 <font size = "5">
 <tr id = rem1> 
 	<td>
@@ -78,15 +85,16 @@
 </tr>
 </font>
 </tbody>
+<!-- END REMINDERS LIST TABLE -->
 
 
 <!-- .hidden style hides Reminders Table by default -->
 <style>
   .hidden {display: none;}
 </style>
+</table> 
 
-
-</table> </center>
+</center>
 
 
 <script>
