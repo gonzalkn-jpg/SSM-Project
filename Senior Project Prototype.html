@@ -10,10 +10,13 @@
 
 <body>
 	<h1>
-		&nbsp; Kheren Gonzalez - Senior Project Prototype :)
+		&nbsp; Kheren Gonzalez - Senior Project :)
 	</h1>
 	
-<br> </br> <br> </br> <br> </br> <br> </br> <!-- spaced out downwards; let the stuff breathe -->
+<br> </br> 
+<br> </br> 
+<br> </br> 
+<br> </br> <!-- spaced out downwards; let the stuff breathe -->
 
 
 
@@ -59,49 +62,75 @@
 <br> </br> <br> </br>
 
 <center>
-<!-- TIMER -->
+<div class = "container"> <!-- div container so that Timer and Reminders will be displayed next to each other -->
 
+<!-- TIMER -->
+<table id = "timerTable" border = "1" class = "hidden">
+<thead>
+	<tr> <th> <font size = "6"> <strong> <u> Timer </u> </strong> </font> </th> </tr>
+</thead>
+
+<tbody id = "timerBody">
+<font size = "5">
+	<tr>
+		<td>
+			Put something here
+		</td>
+	</tr>
+</font>
+</tbody>
+</table>
 <!-- END TIMER -->
 
-
+<br> </br>
 
 <!-- REMINDERS LIST TABLE -->
 <table id = "remsTable" border = "1" class = "hidden">
 
 <!-- improved Reminders List; hidden by default until 'Reminders' button is clicked -->
 <thead> 
-<tr> <th> <font size = "6"> <strong> <u> Reminders List </u> </strong> </font> </th> </tr>
+	<tr> <th> <font size = "6"> <strong> <u> Reminders List </u> </strong> </font> </th> </tr>
 </thead>
 
 <tbody id = "remListBody">
 <font size = "5">
-<tr id = rem1> 
-	<td>
-		<input type = "button" id = "check1" value = ' ' size = 3>
-		<input type = "text" id = "remBox1" value = "" size = 15>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input type = "button" id = "addRem" value = '+' size 4>
-	</td>
-</tr>
+	<tr id = rem1> 
+		<td>
+			<input type = "button" id = "check1" value = ' ' size = 3>
+			<input type = "text" id = "remBox1" value = "" size = 15>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type = "button" id = "addRem" value = '+' size 4>
+		</td>
+	</tr>
 </font>
 </tbody>
 <!-- END REMINDERS LIST TABLE -->
 
+</table>
+</div>
+</center>
 
 <!-- .hidden style hides Reminders Table by default -->
 <style>
-  .hidden {display: none;}
-</style>
-</table> 
-
-</center>
+	.hidden {display: none;}
+  
+	.container {
+		display: flex;
+		gap: 10px;
+	}
+	
+	.table {
+		flex: 1;
+		border: 1px solid #ccc;
+	}
+</style> 
 
 
 <script>
  <!-- functions, variables, etc. will be defined here -->
 
 
- <!-- TOGGLE VISIBILITY FUNCTION -->
+ <!-- TOGGLE VISIBILITY FUNCTIONS -->
  <!-- when clicking "Reminders" button, it toggles Reminders List visibility -->
 const toggleRems = document.getElementById('reminders');
 const toggleTab = document.getElementById('remsTable');
@@ -109,7 +138,15 @@ const toggleTab = document.getElementById('remsTable');
 toggleRems.addEventListener('click', () => {
     remsTable.classList.toggle('hidden');
   });
- <!-- END TOGGLE VISIBILITY FUNCTION -->
+  
+  <!-- when clicking "Timer" button, it toggles Timer visibility -->
+const toggleTimer = document.getElementById('timer');
+const toggleTimeTab = document.getElementById('timerTable');
+
+toggleTimer.addEventListener('click', () => {
+    timerTable.classList.toggle('hidden');
+  });
+ <!-- END TOGGLE VISIBILITY FUNCTIONS -->
 
 
 
