@@ -66,19 +66,34 @@
 
 <!-- TIMER -->
 <table id = "timerTable" border = "1" class = "hidden">
+
 <thead>
-	<tr> <th> <font size = "6"> <strong> <u> Timer </u> </strong> </font> </th> </tr>
+	<tr> <th> <center> <font size = "6"> <strong> <u> Timer </u> </strong> </font> </center> </th> </tr>
 </thead>
 
 <tbody id = "timerBody">
 <font size = "5">
 	<tr>
 		<td>
-			Put something here
+			<input type = "number" id = "hrs" style = "width: 100px; height: 20px;">
+		</td>
+		<td>
+			<input type = "number" id = "min" style = "width: 100px; height: 20px;">
+		</td>
+		<td>
+			<input type = "number" id = "sec" style = "width: 100px; height: 20px;">
 		</td>
 	</tr>
 </font>
 </tbody>
+
+<tfoot>
+	<tr>
+		<td> <center> <b> Hours </b> </center> </td>
+		<td> <center> <b> Minutes </b> </center> </td>
+		<td> <center> <b> Seconds </b> </center> </td>
+	</tr>
+</tfoot>
 </table>
 <!-- END TIMER -->
 
@@ -96,10 +111,10 @@
 <font size = "5">
 	<tr id = rem1> 
 		<td>
-			<input type = "button" id = "check1" value = ' ' size = 3>
-			<input type = "text" id = "remBox1" value = "" size = 15>
+			<input type = "checkbox" class = "checker" id = "check1">
+			<input type = "text" id = "remBox1" value = "" style = "width: 150px; height: 20px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type = "button" id = "addRem" value = '+' size 4>
+			<input type = "button" class = "add-but" id = "addRem" value = '+'>
 		</td>
 	</tr>
 </font>
@@ -110,12 +125,13 @@
 </div>
 </center>
 
-<!-- .hidden style hides Reminders Table by default -->
+	
 <style>
 	.hidden {display: none;}
-  
+	
 	.container {
 		display: flex;
+		justify-content: center;
 		gap: 10px;
 	}
 	
@@ -123,7 +139,23 @@
 		flex: 1;
 		border: 1px solid #ccc;
 	}
+	
+	.checker {
+		transform: scale(1.5);
+		margin: 10px;
+	}
+	
+	.add-but {
+		width: 25px;
+		height: 25px;
+		margin: 5px;
+	}
 </style> 
+ <!-- comments on style are down here because putting them inside the <style> element prevents it from working -->
+	<!-- .hidden style hides Reminders Table by default -->
+	<!-- .container + .table styles place Timer and Reminders Table next to each other at center -->
+	<!-- .checker just adjusts the size of the checkbox in Reminders List -->
+	<!-- .add-but adjusts the size of the add button in Reminders List -->
 
 
 <script>
@@ -157,18 +189,12 @@ toggleTimer.addEventListener('click', () => {
 
 
  <!-- TOGGLE CHECKMARKS FUNCTION -->
- <!-- toggles value of the check buttons between no value and a checkmark symbol -->
+ <!-- deletes value from reminder box -->
 const chk1 = document.getElementById("check1");
 const rm1 = document.getElementById("remBox1");
 
 chk1.addEventListener("click", function(){
-    if (chk1.value === "✓") {
-      chk1.value = " ";
-	  rm1.value = " ";} 
-	  else {
-      chk1.value = "✓";
 	  rm1.value = " ";
-    }
   });
  <!-- END TOGGLE CHECKMARKS FUNCTION -->
   
