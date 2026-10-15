@@ -2,15 +2,15 @@
 
 
 <html>
-<!-- Just customizing the site a little by giving it a soft color palette -->
-<body bgcolor = "b1bfe0" text = "37344d">
+
 <head>
 	<title> Senior Project Prototype </title> <!-- website tab name -->
 </head>
 
-<body>
+<!-- Just customizing the site a little by giving it a soft color palette -->
+<body id = "htmlBody" bgcolor = "b1bfe0" text = "37344d">
 	<h1>
-		&nbsp; Kheren Gonzalez - Senior Project :)
+		&nbsp; Senior Project - Time Pending :)
 	</h1>
 	
 <br> </br> 
@@ -47,7 +47,7 @@
 	</center> </td>
 		
 	<td> <center> <!-- Column 2 -->
-	<button id = "mystery"> 
+	<button id = "mysterious"> 
 		Mysterious Button ;) 								<!-- It probably does something -->
 	</button> 
 	</center> </td>
@@ -76,14 +76,39 @@
 <tbody id = "timerBody">
 <font size = "5">
 	<tr>
+		<td colspan="3">
+        <div id = "timerDisplay" 
+			style = "font-size: 30px; text-align: center; font-weight: bold; padding: 15px;">
+            00:00:00
+        </div>
+
+        <div style="text-align: center;">
+            <button type="button" id="startPause">
+                Start
+            </button>
+
+            <button type="button" id="resetTimer">
+                Reset
+            </button>
+        </div>
+    </td>
+	</tr>
+	
+	<tr>
 		<td>
-			<input type = "number" id = "hrs" style = "width: 100px; height: 20px;">
+			<input type = "number" id = "hrs" 
+				min = "0" max = "24" step = "1" value = "0"
+				style = "width: 100px; height: 20px;">
 		</td>
 		<td>
-			<input type = "number" id = "min" style = "width: 100px; height: 20px;">
+			<input type = "number" id = "min" 
+				min = "0" max = "60" step = "1" value = "0"
+				style = "width: 100px; height: 20px;">
 		</td>
 		<td>
-			<input type = "number" id = "sec" style = "width: 100px; height: 20px;">
+			<input type = "number" id = "sec" 
+				min = "0" max = "60" step = "1" value = "0"
+				style = "width: 100px; height: 20px;">
 		</td>
 	</tr>
 </font>
@@ -115,8 +140,7 @@
 		<td>
 			<input type = "checkbox" class = "checker" id = "check1">
 			<input type = "text" id = "remBox1" value = "" style = "width: 150px; height: 20px;">
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type = "button" class = "add-but" id = "addRem" value = '+'>
+			<input type = "button" class = "del-but" id = "deleteRem1" value = 'x'>
 		</td>
 	</tr>
 </font>
@@ -147,75 +171,363 @@
 		margin: 10px;
 	}
 	
-	.add-but {
+	.del-but {
 		width: 25px;
 		height: 25px;
-		margin: 5px;
+		margin: 1px;
+		border-color: #fa725a;
+		background-color: #fa624a;
 	}
 </style> 
  <!-- comments on style are down here because putting them inside the <style> element prevents it from working -->
 	<!-- .hidden style hides Reminders Table by default -->
 	<!-- .container + .table styles place Timer and Reminders Table next to each other at center -->
 	<!-- .checker just adjusts the size of the checkbox in Reminders List -->
-	<!-- .add-but adjusts the size of the add button in Reminders List -->
+	<!-- .del-but adjusts sixe and color of the delete button in Reminders List -->
 
 
 <script>
- <!-- functions, variables, etc. will be defined here -->
+ // functions, variables, etc. will be defined here
 
 
- <!-- TOGGLE VISIBILITY FUNCTIONS -->
- <!-- when clicking "Reminders" button, it toggles Reminders List visibility -->
-const toggleRems = document.getElementById('reminders');
-const toggleTab = document.getElementById('remsTable');
+ // TOGGLE VISIBILITY FUNCTIONS
+ // when clicking "Reminders" button, it toggles Reminders List visibility
+ const toggleRems = document.getElementById('reminders');
+ const toggleTab = document.getElementById('remsTable');
 
-toggleRems.addEventListener('click', () => {
-    remsTable.classList.toggle('hidden');
-  });
+ toggleRems.addEventListener('click', () => {
+	remsTable.classList.toggle('hidden');
+ });
   
-  <!-- when clicking "Timer" button, it toggles Timer visibility -->
-const toggleTimer = document.getElementById('timer');
-const toggleTimeTab = document.getElementById('timerTable');
+ // when clicking "Timer" button, it toggles Timer visibility
+ const toggleTimer = document.getElementById('timer');
+ const toggleTimeTab = document.getElementById('timerTable');
 
-toggleTimer.addEventListener('click', () => {
-    timerTable.classList.toggle('hidden');
-  });
- <!-- END TOGGLE VISIBILITY FUNCTIONS -->
-
-
-
- <!-- ADD REMINDERS FUNCTIONS -->
-
- <!-- END ADD REMINDERS FUNCTIONS -->
-
-
-
- <!-- TOGGLE CHECKMARKS FUNCTION -->
- <!-- deletes value from reminder box -->
-const chk1 = document.getElementById("check1");
-const rm1 = document.getElementById("remBox1");
-
-chk1.addEventListener("click", function(){
-	  rm1.value = " ";
-  });
- <!-- END TOGGLE CHECKMARKS FUNCTION -->
-  
-  
-  
- <!-- LOCAL STORAGE FUNCTION -->
-
+ toggleTimer.addEventListener('click', () => {
+	timerTable.classList.toggle('hidden');
+ });
+ // END TOGGLE VISIBILITY FUNCTIONS -->
  
- <!-- practice code -->
-const reminder1 = document.getElementById('rem1');
-
-function saveData() {
-	const txt = reminder1.value;
-	localStorage.setItem('rem1Storage', txt);
-	}
- <!-- end practice code -->
  
- <!-- END LOCAL STORAGE FUNCTION -->
+ 
+ // LOCAL STORAGE FUNCTION
+ function saveReminders() {
+    const rows = document.querySelectorAll("#remListBody tr");
+    const reminders = [];
 
+    rows.forEach(function (row) {
+        const textBox = row.querySelector('input[type="text"]');
+        const checkbox = row.querySelector('input[type="checkbox"]');
+
+        reminders.push({
+            text: textBox.value,
+            checked: checkbox.checked
+        });
+    });
+
+    localStorage.setItem("myReminders", JSON.stringify(reminders));
+}
+
+function loadReminders() {
+    const savedData = localStorage.getItem("myReminders");
+
+    if (savedData === null) {
+        return;
+    }
+
+    let reminders;
+
+    try {
+        reminders = JSON.parse(savedData);
+    } catch (error) {
+        console.error("Could not load reminders:", error);
+        return;
+    }
+
+    if (!Array.isArray(reminders) || reminders.length === 0) {
+        return;
+    }
+
+    const firstRow = document.getElementById("rem1");
+    const firstTextBox = firstRow.querySelector('input[type="text"]');
+    const firstCheckbox = firstRow.querySelector('input[type="checkbox"]');
+
+    firstTextBox.value = reminders[0].text;
+    firstCheckbox.checked = reminders[0].checked;
+    firstTextBox.classList.toggle("completed", firstCheckbox.checked);
+
+    for (let i = 1; i < reminders.length; i++) {
+        addReminder();
+
+        const rows = document.querySelectorAll("#remListBody tr");
+        const newRow = rows[rows.length - 1];
+
+        const textBox = newRow.querySelector('input[type="text"]');
+        const checkbox = newRow.querySelector('input[type="checkbox"]');
+
+        textBox.value = reminders[i].text;
+        checkbox.checked = reminders[i].checked;
+
+        textBox.classList.toggle("completed", checkbox.checked);
+    }
+}
+
+ // END LOCAL STORAGE FUNCTION
+
+
+
+ // ADD/DELETE REMINDERS FUNCTIONS
+ //delete reminder function for first reminder box only (deletes reminder value but not the row)
+ const delRem1 = document.getElementById('deleteRem1');
+ const rem1 = document.getElementById('remBox1');
+ 
+ delRem1.addEventListener('click', () => {
+	rem1.value = '';
+ });
+ 
+ document.getElementById("remBox1")
+    .addEventListener("input", saveReminders);
+ 
+ const firstRem = document.getElementById("remBox1");
+
+ firstRem.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        addReminder();
+    }
+ });
+
+ function addReminder() {
+    const tableBody = document.getElementById("remListBody");
+    const newRow = document.createElement("tr");
+    const newCell = document.createElement("td");
+    
+	const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.className = "checker";
+    
+	const textBox = document.createElement("input");
+    textBox.type = "text";
+    textBox.className = "reminder-input";
+    textBox.style.width = "150px";
+    textBox.style.height = "20px";
+	textBox.addEventListener("input", saveReminders);
+	
+    const deleteButton = document.createElement("input");
+    deleteButton.type = "button";
+    deleteButton.className = "del-but";
+    deleteButton.value = "×";
+	
+	checkbox.addEventListener("change", saveReminders);
+
+    deleteButton.addEventListener("click", function () {
+        newRow.remove();
+		saveReminders();
+    });
+
+    textBox.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            addReminder();
+        }
+    });
+
+    newCell.append(
+        checkbox,
+        textBox,
+        deleteButton
+    );
+
+    newRow.appendChild(newCell);
+    tableBody.appendChild(newRow);
+    textBox.focus();
+ }
+ // END ADD/DELETE REMINDERS FUNCTIONS
+ 
+ 
+ 
+ // TIMER FUNCTION 
+ const hrsNum = document.getElementById("hrs");
+ const minNum = document.getElementById("min");
+ const secNum = document.getElementById("sec");
+
+ const timerDisplay = document.getElementById("timerDisplay");
+ const startPauseButton = document.getElementById("startPause");
+ const resetTimerButton = document.getElementById("resetTimer");
+
+ let timerInterval = null;
+ let timerRunning = false;
+ let remainingSeconds = null;
+ let endTime = 0;
+
+
+ function getTimerInput() {
+    const hours = hrsNum.valueAsNumber;
+    const minutes = minNum.valueAsNumber;
+    const seconds = secNum.valueAsNumber;
+
+    if (
+        hrsNum.value.trim() === "" ||
+        !Number.isInteger(hours) || hours < 0 || hours > 24
+    ) {
+        alert("Hours must be a whole number from 0 to 24!");
+        hrsNum.focus();
+        return null;
+    }
+
+    if (
+        minNum.value.trim() === "" ||
+        !Number.isInteger(minutes) || minutes < 0 || minutes > 60
+    ) {
+        alert("Minutes must be a whole number from 0 to 60!");
+        minNum.focus();
+        return null;
+    }
+
+    if (
+        secNum.value.trim() === "" ||
+        !Number.isInteger(seconds) || seconds < 0 || seconds > 60
+    ) {
+        alert("Seconds must be a whole number from 0 to 60!");
+        secNum.focus();
+        return null;
+    }
+
+    return hours * 3600 + minutes * 60 + seconds;
+ }
+
+ function displayTime(totalSeconds) {
+    const hours = Math.floor(totalSeconds / 3600);
+
+    const minutes = Math.floor(
+        (totalSeconds % 3600) / 60
+    );
+
+    const seconds = totalSeconds % 60;
+
+    timerDisplay.textContent =
+        String(hours).padStart(2, "0") + ":" +
+        String(minutes).padStart(2, "0") + ":" +
+        String(seconds).padStart(2, "0");
+}
+
+function stopTimerInterval() {
+    if (timerInterval !== null) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+}
+
+
+function updateCountdown() {
+    // Calculate the remaining time
+    remainingSeconds = Math.max(
+        0,
+        Math.ceil((endTime - Date.now()) / 1000)
+    );
+
+    displayTime(remainingSeconds);
+
+    // Stop when the countdown reaches zero
+    if (remainingSeconds === 0) {
+        stopTimerInterval();
+        timerRunning = false;
+        remainingSeconds = null;
+
+        startPauseButton.textContent = "Start";
+
+        alert("Time's up! ⏰");
+    }
+}
+
+
+function startPauseTimer() {
+    // If running, pause the countdown
+    if (timerRunning) {
+        remainingSeconds = Math.max(
+            0,
+            Math.ceil((endTime - Date.now()) / 1000)
+        );
+
+        stopTimerInterval();
+        timerRunning = false;
+
+        startPauseButton.textContent = "Resume";
+        displayTime(remainingSeconds);
+        return;
+    }
+
+    // If starting a new countdown, read the inputs
+    if (remainingSeconds === null) {
+        remainingSeconds = getTimerInput();
+
+        // Invalid input: don't start
+        if (remainingSeconds === null) {
+            return;
+        }
+    }
+
+    if (remainingSeconds === 0) {
+        alert("Please enter a time greater than zero!");
+        return;
+    }
+
+    // Calculate when the countdown should finish
+    endTime = Date.now() + remainingSeconds * 1000;
+
+    timerRunning = true;
+    startPauseButton.textContent = "Pause";
+
+    updateCountdown();
+
+    if (timerRunning) {
+        timerInterval = setInterval(updateCountdown, 250);
+    }
+ }
+
+ function resetCountdown() {
+    stopTimerInterval();
+
+    timerRunning = false;
+    remainingSeconds = null;
+
+    startPauseButton.textContent = "Start";
+
+    const seconds = getTimerInput();
+
+    displayTime(seconds === null ? 0 : seconds);
+ }
+
+startPauseButton.addEventListener("click", startPauseTimer);
+resetTimerButton.addEventListener("click", resetCountdown);
+displayTime(getTimerInput() ?? 0);
+ // END TIMER FUNCTION 
+ 
+ 
+ 
+ // THE MYSTERIOUS FUNCTION
+ const htmlColor = document.getElementById('htmlBody');
+ const mystery = document.getElementById('mysterious');
+ const colors = [
+    "#b1bfe0", // Blue - original color
+    "#90d6a3", // Green
+    "#fff099", // Yellow
+    "#ffbd80", // Orange
+    "#ff8080", // Red
+    "#f5a6d1", // Pink
+    "#c9a0f0"  // Purple
+ ];
+
+ let currentColor = 0;
+
+ mystery.addEventListener("click", function () {
+    currentColor = (currentColor + 1) % colors.length;
+    document.body.style.backgroundColor = colors[currentColor];
+});
+
+ // END THE MYSTERIOUS FUNCTION
+
+	loadReminders();
 </script> 
 
 
